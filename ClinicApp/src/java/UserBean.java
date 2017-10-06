@@ -72,6 +72,20 @@ public class UserBean implements Serializable {
         return userRole;
     }
 
+    public boolean isPatient()
+    {
+        return userRole!=null && userRole==UserRole.PATIENT;
+    }
+    
+    public boolean isDoctor()
+    {
+        return userRole!=null && userRole==UserRole.DOCTOR;
+    }
+    
+    public boolean isReceptionist()
+    {
+        return userRole!=null && userRole==UserRole.RECEPTIONIST;
+    }
     /**
      * Creates a new instance of UserBean
      */

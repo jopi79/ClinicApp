@@ -18,18 +18,26 @@
             </ui:define>
 
             <ui:define name="right">
-                right
-            </ui:define>
-
-            <ui:define name="content">
-                <p:panel rendered="#{not userBean.logged}" >
-                    <ui:include src="/segments/login.xhtml" />
-                </p:panel>
                 <p:panel rendered="#{userBean.logged}" >
                     Witaj #{userBean.login}. Jesteś zalogowany jako #{userBean.userRole}.
                     <h:form>
                         <p:commandButton ajax="false" value="Wyloguj" action="#{userBean.logout()}" />
                     </h:form>
+                </p:panel>
+            </ui:define>
+
+            <ui:define name="content">
+                <p:panel rendered="#{not userBean.logged}" >
+                    <ui:include src="/segments/login.xhtml" />
+                </p:panel>                
+                <p:panel rendered="#{userBean.doctor}" >                    
+                    <ui:include src="/doctor/doctorIndex.xhtml" />
+                </p:panel>             
+                <p:panel rendered="#{userBean.receptionist}" >                    
+                    <ui:include src="/receptionist/recIndex.xhtml" />
+                </p:panel>             
+                <p:panel rendered="#{userBean.patient}" >                    
+                    <ui:include src="/patient/patientIndex.xhtml" />
                 </p:panel>
             </ui:define>
 
