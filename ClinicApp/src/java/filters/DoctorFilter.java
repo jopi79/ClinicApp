@@ -16,7 +16,6 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -26,7 +25,6 @@ import model.UserRole;
  *
  * @author Student
  */
-@WebFilter(filterName = "DoctorFilter", urlPatterns = {"/faces/doctor/*"})
 public class DoctorFilter implements Filter {
     
     private static final boolean debug = true;
@@ -45,26 +43,22 @@ public class DoctorFilter implements Filter {
             log("DoctorFilter:DoBeforeProcessing");
         }
 
-        // Write code here to process the request and/or response before
-        // the rest of the filter chain is invoked.
-        // For example, a logging filter might log items on the request object,
-        // such as the parameters.
-        /*
-	for (Enumeration en = request.getParameterNames(); en.hasMoreElements(); ) {
-	    String name = (String)en.nextElement();
-	    String values[] = request.getParameterValues(name);
-	    int n = values.length;
-	    StringBuffer buf = new StringBuffer();
-	    buf.append(name);
-	    buf.append("=");
-	    for(int i=0; i < n; i++) {
-	        buf.append(values[i]);
-	        if (i < n-1)
-	            buf.append(",");
-	    }
-	    log(buf.toString());
-	}
-         */
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse res = (HttpServletResponse) response;
+        
+        HttpSession session = req.getSession();
+        UserBean userBean = (UserBean) session.getAttribute("userBean");
+        UserRole role = userBean==null ? null : userBean.getUserRole();
+        if(role!=null && role==UserRole.DOCTOR)
+        {
+//            chain.doFilter(request, response);
+        }
+        else
+        {
+            session.setAttribute("reqURL", req.getRequestURI());
+            res.sendRedirect(req.getContextPath()+"/faces/index.xhtml");
+        }
+        
     }    
     
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
@@ -111,25 +105,30 @@ public class DoctorFilter implements Filter {
         
         doBeforeProcessing(request, response);
         
-        HttpServletRequest req = (HttpServletRequest) request;
-        HttpServletResponse res = (HttpServletResponse) response;
-        
-        HttpSession session = req.getSession();
-        UserBean userBean = (UserBean) session.getAttribute("userBean");
-        UserRole role = userBean==null ? null : userBean.getUserRole();
-        if(role!=null && role==UserRole.DOCTOR)
-        {
+        Throwable problem = null;
+        try {
             chain.doFilter(request, response);
-        }
-        else
-        {
-            session.setAttribute("reqURL", req.getRequestURI());
-            res.sendRedirect(req.getContextPath()+"/faces/login.xhtml");
+        } catch (Throwable t) {
+            // If an exception is thrown somewhere down the filter chain,
+            // we still want to execute our after processing, and then
+            // rethrow the problem after that.
+            problem = t;
+            t.printStackTrace();
         }
         
         doAfterProcessing(request, response);
 
-        
+        // If there was a problem, we want to rethrow it if it is
+        // a known type, otherwise log it.
+        if (problem != null) {
+            if (problem instanceof ServletException) {
+                throw (ServletException) problem;
+            }
+            if (problem instanceof IOException) {
+                throw (IOException) problem;
+            }
+            sendProcessingError(problem, response);
+        }
     }
 
     /**
