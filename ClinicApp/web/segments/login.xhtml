@@ -9,15 +9,16 @@
     </h:head>
     <h:body>
         <ui:composition>
+            
             Logowanie:
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputText value="Login:" />
-                    <h:inputText value="#{userBean.login}" />
-                    <h:outputText value="Hasło:" />
-                    <h:inputSecret value="#{userBean.password}" />
+                    <p:outputLabel value="Login:" />
+                    <p:inputText value="#{userBean.login}" />
+                    <p:outputLabel value="Hasło:" />
+                    <p:password  value="#{userBean.password}" />
                 </h:panelGrid>
-                <h:commandButton value="Zaloguj" />
+                <p:commandButton ajax="false" value="Zaloguj" action="#{userBean.logIn()}" />
             </h:form>
 
         </ui:composition>

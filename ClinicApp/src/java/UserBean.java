@@ -7,6 +7,7 @@
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -16,7 +17,9 @@ import java.io.Serializable;
 @SessionScoped
 public class UserBean implements Serializable {
 
-    private String login,password;
+    private String login, password;
+    private UserRole userRole;
+    private boolean logged = false;
 
     public String getLogin() {
         return login;
@@ -33,11 +36,46 @@ public class UserBean implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
+    public String logIn() {
+        if ("jan".equals(login)) {
+            userRole = UserRole.PATIENT;
+            logged = true;
+            return null;
+        }
+        if ("adam".equals(login)) {
+            userRole = UserRole.DOCTOR;
+            logged = true;
+            return null;
+        }
+        if ("ala".equals(login)) {
+            userRole = UserRole.RECEPTIONIST;
+            logged = true;
+            return null;
+        }
+        logged = false;
+        return null;
+    }
+
+    public String logout() {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        logged = false;
+        userRole = null;
+        return null;
+    }
+
+    public boolean isLogged() {
+        return logged;
+    }
+
+    public UserRole getUserRole() {
+        return userRole;
+    }
+
     /**
      * Creates a new instance of UserBean
      */
     public UserBean() {
     }
-    
+
 }
