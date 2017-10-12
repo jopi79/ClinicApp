@@ -9,26 +9,13 @@
 
         <ui:composition template="./templates/mainTemplate.xhtml">
 
-            <ui:define name="top">
-                <h3>Clinic App</h3>
-            </ui:define>
-
-            <ui:define name="left">
-                left
-            </ui:define>
-
-            <ui:define name="right">
-                <p:panel rendered="#{userBean.logged}" >
-                    Witaj #{userBean.login}. Jesteś zalogowany jako #{userBean.userRole}.
-                    <h:form>
-                        <p:commandButton ajax="false" value="Wyloguj" action="#{userBean.logout()}" />
-                    </h:form>
-                </p:panel>
-            </ui:define>
 
             <ui:define name="content">
                 <p:panel rendered="#{not userBean.logged}" >
-                    <ui:include src="/segments/login.xhtml" />
+                    <h3>Witamy w wirtualnej przychodni.</h3>
+                    Tu możesz umówić się do lekarza.<br/>
+                    Jeśli nie masz konta - zarejestruj się.
+                    Jeśli masz już konto - <h:link value="zaloguj się" outcome="login" />
                 </p:panel>                
                 <p:panel rendered="#{userBean.doctor}" >                    
                     <ui:include src="/doctor/doctorIndex.xhtml" />
@@ -41,9 +28,6 @@
                 </p:panel>
             </ui:define>
 
-            <ui:define name="bottom">
-                
-            </ui:define>
 
         </ui:composition>
 

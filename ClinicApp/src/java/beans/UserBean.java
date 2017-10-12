@@ -5,7 +5,6 @@ package beans;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -44,20 +43,20 @@ public class UserBean implements Serializable {
         if ("jan".equals(login)) {
             userRole = UserRole.PATIENT;
             logged = true;
-            return null;
+            return "index";
         }
         if ("adam".equals(login)) {
             userRole = UserRole.DOCTOR;
             logged = true;
-            return null;
+            return "index";
         }
         if ("ala".equals(login)) {
             userRole = UserRole.RECEPTIONIST;
             logged = true;
-            return null;
+            return "index";
         }
         logged = false;
-        return null;
+        return "index";
     }
 
     public String logout() {
@@ -75,20 +74,18 @@ public class UserBean implements Serializable {
         return userRole;
     }
 
-    public boolean isPatient()
-    {
-        return userRole!=null && userRole==UserRole.PATIENT;
+    public boolean isPatient() {
+        return userRole != null && userRole == UserRole.PATIENT;
     }
-    
-    public boolean isDoctor()
-    {
-        return userRole!=null && userRole==UserRole.DOCTOR;
+
+    public boolean isDoctor() {
+        return userRole != null && userRole == UserRole.DOCTOR;
     }
-    
-    public boolean isReceptionist()
-    {
-        return userRole!=null && userRole==UserRole.RECEPTIONIST;
+
+    public boolean isReceptionist() {
+        return userRole != null && userRole == UserRole.RECEPTIONIST;
     }
+
     /**
      * Creates a new instance of UserBean
      */

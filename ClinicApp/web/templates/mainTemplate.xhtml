@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -14,11 +15,28 @@
     <h:body>
 
         <div id="top">
-            <ui:insert name="top">Top</ui:insert>
+            <ui:insert name="top">
+                <h:panelGrid columns="2">
+                    <h3>Clinic App</h3>
+                    <h:form rendered="#{userBean.logged}">
+                        Witaj #{userBean.login}. Jesteś zalogowany jako #{userBean.userRole}.
+                        <p:commandLink ajax="false" value="Wyloguj" action="#{userBean.logout()}" />
+                    </h:form> 
+                    <h:form rendered="#{not userBean.logged}">
+                        Jesteś niezalogowany                    
+                        <p:commandLink ajax="false" value="Zaloguj się" action="login" />
+                    </h:form>
+                </h:panelGrid>
+            </ui:insert>
         </div>
         <div>
             <div id="left">
-                <ui:insert name="left">Left</ui:insert>
+                <ui:insert name="left">
+                    <h:link value="Główna" outcome="/index.xhtml" /><br/>
+                    <h:link value="Nasza oferta" outcome="/public/offer.xhtml" /><br/>
+                    <h:link value="Nasi lekarze" outcome="/public/doctors.xhtml" /><br/>
+                    
+                </ui:insert>
             </div>
             <div>
                 <div id="right">
@@ -30,7 +48,7 @@
             </div>
         </div>
         <div id="bottom">
-            <ui:insert name="bottom">Bottom</ui:insert>
+            <ui:insert name="bottom">2017</ui:insert>
         </div>
 
     </h:body>
