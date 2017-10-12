@@ -24,7 +24,7 @@
                     </h:form> 
                     <h:form rendered="#{not userBean.logged}">
                         Jesteś niezalogowany                    
-                        <p:commandLink ajax="false" value="Zaloguj się" action="login" />
+                        <p:commandLink ajax="false" value="Zaloguj się" action="/login.xhtml" />
                     </h:form>
                 </h:panelGrid>
             </ui:insert>
