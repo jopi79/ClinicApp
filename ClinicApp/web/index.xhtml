@@ -11,20 +11,21 @@
 
 
             <ui:define name="content">
+                <h3>Witamy w wirtualnej przychodni.</h3>
                 <p:panel rendered="#{not userBean.logged}" >
-                    <h3>Witamy w wirtualnej przychodni.</h3>
                     Tu możesz umówić się do lekarza.<br/>
                     Jeśli nie masz konta - zarejestruj się.
-                    Jeśli masz już konto - <h:link value="zaloguj się" outcome="login" />
+                    Jeśli masz już konto - <h:link value="zaloguj się" outcome="/public/login" />
                 </p:panel>                
-                <p:panel rendered="#{userBean.doctor}" >                    
-                    <ui:include src="/doctor/doctorIndex.xhtml" />
+                <p:panel rendered="#{userBean.doctor}" >            
+                    Przejdź do panelu lekarzy
                 </p:panel>             
-                <p:panel rendered="#{userBean.receptionist}" >                    
-                    <ui:include src="/receptionist/recIndex.xhtml" />
+                <p:panel rendered="#{userBean.receptionist}" >            
+                    Przejdź do panelu administracyjnego                   
+                    <h:link value="Przejdź" outcome="/reception/index" />
                 </p:panel>             
-                <p:panel rendered="#{userBean.patient}" >                    
-                    <ui:include src="/patient/patientIndex.xhtml" />
+                <p:panel rendered="#{userBean.patient}" >                  
+                    Przejdź do panelu pacjenta 
                 </p:panel>
             </ui:define>
 

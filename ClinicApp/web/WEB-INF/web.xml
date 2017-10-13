@@ -8,9 +8,18 @@
         <filter-name>DoctorFilter</filter-name>
         <filter-class>filters.DoctorFilter</filter-class>
     </filter>
+    <filter>
+        <filter-name>ReceptionFIlter</filter-name>
+        <filter-class>filters.ReceptionFilter</filter-class>
+    </filter>
     <filter-mapping>
         <filter-name>DoctorFilter</filter-name>
         <url-pattern>/faces/doctor/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>ReceptionFIlter</filter-name>
+        <url-pattern>/faces/reception/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
     <servlet>

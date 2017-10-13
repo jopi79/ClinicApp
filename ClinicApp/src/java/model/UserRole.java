@@ -13,5 +13,5 @@ package model;
 public enum UserRole {
     PATIENT,
     DOCTOR,
-    RECEPTIONIST
+    RECEPTION
 }

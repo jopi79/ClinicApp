@@ -43,27 +43,27 @@ public class UserBean implements Serializable {
         if ("jan".equals(login)) {
             userRole = UserRole.PATIENT;
             logged = true;
-            return "index";
+            return "/index";
         }
         if ("adam".equals(login)) {
             userRole = UserRole.DOCTOR;
             logged = true;
-            return "index";
+            return "/index";
         }
         if ("ala".equals(login)) {
-            userRole = UserRole.RECEPTIONIST;
+            userRole = UserRole.RECEPTION;
             logged = true;
-            return "index";
+            return "/reception/index.xhtml";
         }
         logged = false;
-        return "index";
+        return "/index";
     }
 
     public String logout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         logged = false;
         userRole = null;
-        return null;
+        return "/index";
     }
 
     public boolean isLogged() {
@@ -83,7 +83,7 @@ public class UserBean implements Serializable {
     }
 
     public boolean isReceptionist() {
-        return userRole != null && userRole == UserRole.RECEPTIONIST;
+        return userRole != null && userRole == UserRole.RECEPTION;
     }
 
     /**
