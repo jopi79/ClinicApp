@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import javax.inject.Inject;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -26,7 +27,8 @@ import model.UserRole;
  * @author Student
  */
 public class DoctorFilter implements Filter {
-    
+    @Inject
+    UserBean userBean;
     private static final boolean debug = true;
 
     // The filter configuration object we are associated with.  If
@@ -47,7 +49,7 @@ public class DoctorFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
         
         HttpSession session = req.getSession();
-        UserBean userBean = (UserBean) session.getAttribute("userBean");
+//        UserBean userBean = (UserBean) session.getAttribute("userBean");
         UserRole role = userBean==null ? null : userBean.getUserRole();
         if(role!=null && role==UserRole.DOCTOR)
         {
