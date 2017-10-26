@@ -8,6 +8,7 @@ package beans;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.validation.constraints.Size;
 import model.Doctor;
 
 /**
@@ -17,7 +18,10 @@ import model.Doctor;
 @Named(value = "newDoctorBean")
 @RequestScoped
 public class NewDoctorBean {
-    private String name,lastname;
+    @Size(min=1,message="{name_not_empty}")
+    private String name;
+    @Size(min=1,message="{lastname_not_empty}")
+    private String lastname;
     private String specialization;
     private boolean active;
 
