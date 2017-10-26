@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
@@ -13,13 +14,18 @@
             <ui:define name="content">
                 <h3>Nowy lekarz</h3>
                 <h:form>
-                    <h:panelGrid columns="2">
+                    <h:panelGrid columns="3">
                         <h:outputText value="Imię: " />
-                        <p:inputText value="#{newDoctorBean.name}" />
+                        <p:inputText value="#{newDoctorBean.name}" id="name" />
+                        <p:message for="name" />
                         <h:outputText value="Nazwisko: " />
-                        <p:inputText value="#{newDoctorBean.lastname}" />
+                        <p:inputText value="#{newDoctorBean.lastname}" id="lastname" />
+                        <p:message for="lastname" />
                         <h:outputText value="Specjalizacja: " />
-                        <p:inputText value="#{newDoctorBean.specialization}" />
+                        <p:selectOneMenu  value="#{newDoctorBean.specialization}" id="specialization" >
+                            <f:selectItems value="#{newDoctorBean.specializations}" />
+                        </p:selectOneMenu>
+                        <p:message for="specialization" />
                         <h:outputText value="Dostępny: " />
                         <p:selectBooleanCheckbox value="#{newDoctorBean.active}" />
                     </h:panelGrid>

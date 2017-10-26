@@ -9,22 +9,20 @@ package model;
  *
  * @author Student
  */
-public class Doctor extends Person{
+public class Doctor extends Person {
 
-    private String specialization;
+    private Specialization specialization;
     private boolean active;
 
     public Doctor(String name, String lastname, int id) {
         super(name, lastname, id);
     }
-    
-    
 
-    public String getSpecialization() {
+    public Specialization getSpecialization() {
         return specialization;
     }
 
-    public void setSpecialization(String specialization) {
+    public void setSpecialization(Specialization specialization) {
         this.specialization = specialization;
     }
 
@@ -36,5 +34,12 @@ public class Doctor extends Person{
         this.active = active;
     }
 
-    
+    public enum Specialization {
+        pediatrician,
+        laryngologist,
+        endocrinologist, 
+        ophthalmologist,
+        dentist
+    }
+
 }

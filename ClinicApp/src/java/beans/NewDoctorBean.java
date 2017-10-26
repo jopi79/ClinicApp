@@ -22,7 +22,7 @@ public class NewDoctorBean {
     private String name;
     @Size(min=1,message="{lastname_not_empty}")
     private String lastname;
-    private String specialization;
+    private Doctor.Specialization specialization;
     private boolean active;
 
     public String getName() {
@@ -41,11 +41,11 @@ public class NewDoctorBean {
         this.lastname = lastname;
     }
 
-    public String getSpecialization() {
+    public Doctor.Specialization getSpecialization() {
         return specialization;
     }
 
-    public void setSpecialization(String specialization) {
+    public void setSpecialization(Doctor.Specialization specialization) {
         this.specialization = specialization;
     }
 
@@ -69,6 +69,10 @@ public class NewDoctorBean {
         return "doctors";
     }
 
+    public Doctor.Specialization[] getSpecializations()
+    {
+        return Doctor.Specialization.values();
+    }
     /**
      * Creates a new instance of NewDoctorBean
      */

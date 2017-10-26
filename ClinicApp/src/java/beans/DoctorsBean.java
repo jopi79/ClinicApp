@@ -71,16 +71,16 @@ public class DoctorsBean implements Serializable{
     {
         doctors = new ArrayList();
         Doctor d = new Doctor("Adam","Adamiak",1);
-        d.setSpecialization("pediatra");
+        d.setSpecialization(Doctor.Specialization.pediatrician);
         doctors.add(d);
         d = new Doctor("Bazyl","Bieńkowski",2);
-        d.setSpecialization("laryngolog");
+        d.setSpecialization(Doctor.Specialization.endocrinologist);
         doctors.add(d);
         d = new Doctor("Celestyn","Cierak",3);
-        d.setSpecialization("lekarz rodzinny");
+        d.setSpecialization(Doctor.Specialization.laryngologist);
         doctors.add(d);
         d = new Doctor("Damian","Daniszczuk",4);
-        d.setSpecialization("endokrynolog");
+        d.setSpecialization(Doctor.Specialization.ophthalmologist);
         doctors.add(d);
     }
 }
