@@ -53,7 +53,10 @@ public class DoctorsBean implements Serializable{
         return doctors;
     }
 
-    
+    public void add(Doctor d)
+    {
+        doctors.add(d);
+    }
     
     
     /**
