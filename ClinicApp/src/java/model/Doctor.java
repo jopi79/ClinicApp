@@ -5,6 +5,8 @@
  */
 package model;
 
+import java.util.ResourceBundle;
+
 /**
  *
  * @author Student
@@ -39,7 +41,22 @@ public class Doctor extends Person {
         laryngologist,
         endocrinologist, 
         ophthalmologist,
-        dentist
+        dentist;
+        private final static ResourceBundle rb = ResourceBundle.getBundle("messages.specializations");
+        @Override
+        public String toString()
+        {
+            switch(this){
+                case pediatrician : return rb.getString("pediatrician");
+                case laryngologist : return rb.getString("laryngologist");
+                case endocrinologist : return rb.getString("endocrinologist");
+                case ophthalmologist : return rb.getString("ophthalmologist");
+                case dentist : return rb.getString("dentist");
+                default : return "";
+            }
+            
+        }
+        
     }
 
 }

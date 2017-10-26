@@ -23,7 +23,9 @@
                         <p:message for="lastname" />
                         <h:outputText value="Specjalizacja: " />
                         <p:selectOneMenu  value="#{newDoctorBean.specialization}" id="specialization" >
-                            <f:selectItems value="#{newDoctorBean.specializations}" />
+                            <f:selectItems value="#{newDoctorBean.specializations}"
+                                           var="sp" itemLabel="#{sp.toString()}"
+                                            />
                         </p:selectOneMenu>
                         <p:message for="specialization" />
                         <h:outputText value="Dostępny: " />
