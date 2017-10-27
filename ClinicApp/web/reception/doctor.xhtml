@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
     <f:metadata >
         <f:viewParam name="item" value="#{doctorBean.selectedId}"/>
     </f:metadata>
@@ -15,7 +16,10 @@
                 <h3>#{doctorBean.selected.name} #{doctorBean.selected.lastname}</h3>
                 Specjalizacja: #{doctorBean.selected.specialization}<br/>
                 Dostępność: #{doctorBean.selected.active}
-
+                <br/><br/>
+                <h:link value="Nowa wizyta" outcome="new_visit">
+                    <f:param name="doctor" value="#{doctorBean.selected.id}" />
+                </h:link>
             </ui:define>
 
         </ui:composition>

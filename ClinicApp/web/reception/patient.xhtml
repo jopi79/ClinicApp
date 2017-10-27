@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
     <f:metadata >
         <f:viewParam name="item" value="#{patientBean.selectedId}"/>
     </f:metadata>
@@ -14,7 +15,10 @@
             <ui:define name="content">
                 <h3>#{patientBean.selected.name} #{patientBean.selected.lastname}</h3>
                 Data urodzenia: #{patientBean.selected.formattedBirthDate}
-
+                <br/><br/>
+                <h:link value="Nowa wizyta" outcome="new_visit">
+                    <f:param name="patient" value="#{patientBean.selected.id}" />
+                </h:link>
             </ui:define>
 
         </ui:composition>

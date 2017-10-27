@@ -29,6 +29,8 @@ public class NewVisitBean {
 //    private Doctor doctor;
     private Date date;
 
+    
+    
     public int getPatientId() {
         return patientId;
     }
