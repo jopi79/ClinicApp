@@ -13,7 +13,7 @@
                 
                 <h3>Lekarze</h3>
                 <ul>
-                    <ui:repeat value="#{doctorsBean.doctors}" var="doctor">
+                    <ui:repeat value="#{doctorBean.doctors}" var="doctor">
                         <li><h:link value="#{doctor.name} #{doctor.lastname}" outcome="doctor">
                                 <f:param name="item" value="#{doctor.id}" />
                             </h:link>

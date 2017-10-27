@@ -18,9 +18,9 @@ import model.Doctor;
  *
  * @author Student
  */
-@Named(value = "doctorsBean")
+@Named(value = "doctorBean")
 @SessionScoped
-public class DoctorsBean implements Serializable{
+public class DoctorBean implements Serializable{
 
     private List<Doctor> doctors;
 
@@ -62,7 +62,7 @@ public class DoctorsBean implements Serializable{
     /**
      * Creates a new instance of DoctorBean
      */
-    public DoctorsBean() {
+    public DoctorBean() {
         
     }
     

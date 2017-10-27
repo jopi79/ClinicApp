@@ -58,7 +58,7 @@ public class NewDoctorBean {
     }
     
     @Inject
-    DoctorsBean doctorsBean;
+    DoctorBean doctorsBean;
     
     public String save()
     {
