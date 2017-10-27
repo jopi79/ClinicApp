@@ -14,6 +14,7 @@ import javax.inject.Inject;
 import javax.validation.constraints.Size;
 import model.Doctor;
 import model.Patient;
+import model.Visit;
 
 /**
  *
@@ -23,25 +24,42 @@ import model.Patient;
 @RequestScoped
 public class NewVisitBean {
 
-    private Patient patient;
-    private Doctor doctor;
+    private int patientId, doctorId;
+//    private Patient patient;
+//    private Doctor doctor;
     private Date date;
 
-    public Patient getPatient() {
-        return patient;
+    public int getPatientId() {
+        return patientId;
     }
 
-    public void setPatient(Patient patient) {
-        this.patient = patient;
+    public void setPatientId(int patientId) {
+        this.patientId = patientId;
     }
 
-    public Doctor getDoctor() {
-        return doctor;
+    public int getDoctorId() {
+        return doctorId;
     }
 
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
+    public void setDoctorId(int doctorId) {
+        this.doctorId = doctorId;
     }
+
+//    public Patient getPatient() {
+//        return patient;
+//    }
+//
+//    public void setPatient(Patient patient) {
+//        this.patient = patient;
+//    }
+//
+//    public Doctor getDoctor() {
+//        return doctor;
+//    }
+//
+//    public void setDoctor(Doctor doctor) {
+//        this.doctor = doctor;
+//    }
 
     public Date getDate() {
         return date;
@@ -65,8 +83,15 @@ public class NewVisitBean {
         return doctorBean.getDoctors();
     }
     
+    @Inject
+    VisitBean visitBean;
+    
     public String save()
     {
+        Patient patient = patientBean.find(patientId);
+        Doctor doctor = doctorBean.find(doctorId);
+        Visit visit = new Visit(doctor,patient,date);
+        visitBean.add(visit);
         return null;
     }
     

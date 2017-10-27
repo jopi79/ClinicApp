@@ -59,38 +59,18 @@ public class VisitBean implements Serializable{
 //        return patients;
 //    }
 //
-//    public void add(Patient d)
-//    {
-//        patients.add(d);
-//    }
-//    
-//    
-//    /**
-//     * Creates a new instance of DoctorBean
-//     */
-//    public VisitBean() {
-//        
-//    }
-//    
-//    @PostConstruct
-//    public void init()
-//    {
-//        patients = new ArrayList();
-//        Patient d = new Patient("Ewa","Ezmont",1);
-//        LocalDate localDate = LocalDate.of(1956, Month.DECEMBER, 12);
-//        d.setBirthDate(Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
-//        patients.add(d);
-//        d = new Patient("Franciszek","Fijałkowski",2);
-//        localDate = LocalDate.of(1990, Month.AUGUST, 12);
-//        d.setBirthDate(Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
-//        patients.add(d);
-//        d = new Patient("Giedymin","Graczyk",3);
-//        localDate = LocalDate.of(1966, Month.FEBRUARY, 12);
-//        d.setBirthDate(Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
-//        patients.add(d);
-//        d = new Patient("Halina","Hańska",4);
-//        localDate = LocalDate.of(2012, Month.SEPTEMBER, 12);
-//        d.setBirthDate(Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
-//        patients.add(d);
-//    }
+    public void add(Visit v)
+    {
+        visits.add(v);
+    }
+
+    public VisitBean() {
+        
+    }
+    
+    @PostConstruct
+    public void init()
+    {
+        visits = new ArrayList();        
+    }
 }

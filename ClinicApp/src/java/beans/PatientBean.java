@@ -41,7 +41,7 @@ public class PatientBean implements Serializable{
         this.selected = find(selectedId);
     }
     
-    private Patient find(int id)
+     Patient find(int id)
     {
         for(Patient d : patients)
         {

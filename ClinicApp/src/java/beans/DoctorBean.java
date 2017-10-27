@@ -36,7 +36,7 @@ public class DoctorBean implements Serializable{
         this.selected = find(selectedId);
     }
     
-    private Doctor find(int id)
+     Doctor find(int id)
     {
         for(Doctor d : doctors)
         {

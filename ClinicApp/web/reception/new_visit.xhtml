@@ -16,14 +16,18 @@
                 <h:form>
                     <h:panelGrid columns="3">
                         <h:outputText value="Pacjent: " />
-                        <p:selectOneMenu value="#{newVisitBean.patient}" id="patient">
-                            <f:selectItems value="#{newVisitBean.patients}" />
+                        <p:selectOneMenu value="#{newVisitBean.patientId}" id="patient">
+                            <f:selectItems value="#{newVisitBean.patients}" 
+                                           var="patient"
+                                           itemValue="#{patient.id}" />
                         </p:selectOneMenu>
                         <p:message for="patient" />
                         
                         <h:outputText value="Lekarz: " />
-                        <p:selectOneMenu value="#{newVisitBean.doctor}" id="doctor">
-                            <f:selectItems value="#{newVisitBean.doctors}" />
+                        <p:selectOneMenu value="#{newVisitBean.doctorId}" id="doctor">
+                            <f:selectItems value="#{newVisitBean.doctors}"
+                                           var="doctor"
+                                           itemValue="#{doctor.id}" />
                         </p:selectOneMenu>                        
                         <p:message for="doctor" />
                         
