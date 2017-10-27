@@ -4,7 +4,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <f:metadata >
-        <f:viewParam name="item" value="#{doctorsBean.selectedId}"/>
+        <f:viewParam name="item" value="#{patientBean.selectedId}"/>
     </f:metadata>
 
     <body>
@@ -12,9 +12,8 @@
         <ui:composition template="/templates/recTemplate.xhtml">
 
             <ui:define name="content">
-                <h3>#{doctorsBean.selected.name} #{doctorsBean.selected.lastname}</h3>
-                Specjalizacja: #{doctorsBean.selected.specialization}<br/>
-                Dostępność: #{doctorsBean.selected.active}
+                <h3>#{patientBean.selected.name} #{patientBean.selected.lastname}</h3>
+                Data urodzenia: #{patientBean.selected.formattedBirthDate}
 
             </ui:define>
 
