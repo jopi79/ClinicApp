@@ -17,16 +17,9 @@
         <ui:composition template="/templates/recTemplate.xhtml">
 
             <ui:define name="content">
-                <h3>Nowa wizyta</h3>
+                <h3>Dzisiejsze wizyty</h3>
                 <h:form>
                     <h:panelGrid columns="3">
-                        <h:outputText value="Pacjent: " />
-                        <p:selectOneMenu value="#{newVisitBean.patientId}" id="patient">
-                            <f:selectItems value="#{newVisitBean.patients}" 
-                                           var="patient"
-                                           itemValue="#{patient.id}" />
-                        </p:selectOneMenu>
-                        <p:message for="patient" />
 
                         <h:outputText value="Lekarz: " />
                         <p:selectOneMenu value="#{newVisitBean.doctorId}" id="doctor">
@@ -36,15 +29,8 @@
                         </p:selectOneMenu>                        
                         <p:message for="doctor" />
 
-                        <h:outputText value="Data wizyty: " />
-                        <p:calendar id="date" value="#{newVisitBean.date}" 
-                                    pattern="dd.MM.yyyy HH:mm:ss"
-                                    locale="pl">
-                            <!--<f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" />-->
-                        </p:calendar>
-                        <p:message for="date" />
+                        
                     </h:panelGrid>
-                    <p:commandButton ajax="false" value="Zapisz" action="#{newVisitBean.save}" />
                 </h:form>
             </ui:define>
 
