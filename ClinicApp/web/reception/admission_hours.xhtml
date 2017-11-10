@@ -19,7 +19,7 @@
                 <h:form>
                     <p:dataTable var="entry" value="#{admissionHoursBean.admissionHours}">
                         <p:column headerText="Dzień">
-                            <h:outputText value="#{entry.dayOfWeek}" />
+                            <h:outputText value="#{entry.displayDayOfWeek}" />
                         </p:column>
 
                         <p:column headerText="Od">
