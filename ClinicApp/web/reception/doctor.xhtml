@@ -20,6 +20,10 @@
                 <h:link value="Nowa wizyta" outcome="new_visit">
                     <f:param name="doctor" value="#{doctorBean.selected.id}" />
                 </h:link>
+                <br/><br/>
+                <h:link value="Grafik" outcome="admission_hours">
+                    <f:param name="doctor" value="#{doctorBean.selected.id}" />
+                </h:link>
             </ui:define>
 
         </ui:composition>

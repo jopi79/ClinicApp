@@ -5,7 +5,13 @@
  */
 package model;
 
+import java.time.DayOfWeek;
+import java.time.LocalTime;
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
+import util.Interval;
 
 /**
  *
@@ -18,6 +24,11 @@ public class Doctor extends Person {
 
     public Doctor(String name, String lastname, int id) {
         super(name, lastname, id);
+        admissionHours = new EnumMap(DayOfWeek.class);
+        for(DayOfWeek day : DayOfWeek.values())
+        {
+            admissionHours.put(day, new Interval(LocalTime.MIN, LocalTime.MIN));
+        }
     }
 
     public Specialization getSpecialization() {
@@ -36,6 +47,14 @@ public class Doctor extends Person {
         this.active = active;
     }
 
+    private Map<DayOfWeek,Interval> admissionHours;
+
+    public Map<DayOfWeek, Interval> getAdmissionHours() {
+        return admissionHours;
+    }
+    
+    
+    
     public enum Specialization {
         pediatrician,
         laryngologist,
