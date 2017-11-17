@@ -8,12 +8,13 @@ package beans;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import model.UserRole;
 
 /**
  *
- * @author Student
+ * @author jopi79
  */
 @Named(value = "userBean")
 @SessionScoped
@@ -56,7 +57,11 @@ public class UserBean implements Serializable {
             return "/reception/index.xhtml";
         }
         logged = false;
-        return "/index";
+        FacesContext context = FacesContext.getCurrentInstance();
+        FacesMessage message = new FacesMessage("Logowanie nie powiodło się");
+        message.setSeverity(FacesMessage.SEVERITY_ERROR);
+        context.addMessage(null, message);
+        return null;
     }
 
     public String logout() {
