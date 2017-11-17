@@ -6,6 +6,8 @@
 package beans;
 
 import java.io.Serializable;
+import java.time.DayOfWeek;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -16,7 +18,7 @@ import model.Doctor;
 
 /**
  *
- * @author Student
+ * @author jopi79
  */
 @Named(value = "doctorBean")
 @SessionScoped
@@ -72,15 +74,19 @@ public class DoctorBean implements Serializable{
         doctors = new ArrayList();
         Doctor d = new Doctor("Adam","Adamiak",1);
         d.setSpecialization(Doctor.Specialization.pediatrician);
+        d.setAdmissionHour(DayOfWeek.MONDAY, LocalTime.of(8, 0), LocalTime.of(12,0));
         doctors.add(d);
         d = new Doctor("Bazyl","Bieńkowski",2);
         d.setSpecialization(Doctor.Specialization.endocrinologist);
+        d.setAdmissionHour(DayOfWeek.TUESDAY, LocalTime.of(10, 0), LocalTime.of(12,0));
         doctors.add(d);
         d = new Doctor("Celestyn","Cierak",3);
         d.setSpecialization(Doctor.Specialization.laryngologist);
+        d.setAdmissionHour(DayOfWeek.WEDNESDAY, LocalTime.of(12, 0), LocalTime.of(15,0));
         doctors.add(d);
         d = new Doctor("Damian","Daniszczuk",4);
         d.setSpecialization(Doctor.Specialization.ophthalmologist);
+        d.setAdmissionHour(DayOfWeek.THURSDAY, LocalTime.of(14, 0), LocalTime.of(18,0));
         doctors.add(d);
     }
 }

@@ -12,7 +12,7 @@ import java.util.Locale;
 
 /**
  *
- * @author Student
+ * @author jopi79
  */
 public class AdmissionHoursEntry {
 

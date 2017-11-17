@@ -16,11 +16,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
-import util.Interval;
+import util.DateUtil;
 
 /**
  *
- * @author Student
+ * @author jopi79
  */
 public class Doctor extends Person {
 
@@ -58,6 +58,13 @@ public class Doctor extends Person {
 
     public List<AdmissionHoursEntry> getAdmissionHours() {
         return admissionHours;
+    }
+    
+    public void setAdmissionHour(DayOfWeek day, LocalTime from, LocalTime to)
+    {
+        AdmissionHoursEntry entry = admissionHours.get(day.ordinal());
+        entry.setFrom(DateUtil.toDate(from));
+        entry.setTo(DateUtil.toDate(to));
     }
 
     public enum Specialization {

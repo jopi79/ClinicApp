@@ -25,11 +25,10 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import model.AdmissionHoursEntry;
 import model.Doctor;
-import util.Interval;
 
 /**
  *
- * @author Student
+ * @author jopi79
  */
 @Named(value = "admissionHoursBean")
 @SessionScoped
