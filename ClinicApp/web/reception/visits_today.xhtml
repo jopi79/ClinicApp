@@ -22,16 +22,37 @@
                     <h:panelGrid columns="3">
 
                         <h:outputText value="Lekarz: " />
-                        <p:selectOneMenu value="#{newVisitBean.doctorId}" id="doctor">
-                            <f:selectItems value="#{newVisitBean.doctors}"
+                        <p:selectOneMenu value="#{todaysVisits.doctorId}" 
+                                         onchange="sumbit()"
+                                         id="doctor">
+                            <f:selectItems value="#{doctorBean.doctors}"
                                            var="doctor"
                                            itemValue="#{doctor.id}" />
-                        </p:selectOneMenu>                        
-                        <p:message for="doctor" />
-
-                        
+                        </p:selectOneMenu>       
+                        <h:commandButton value="OK" />
                     </h:panelGrid>
                 </h:form>
+
+
+                #{todaysVisits.doctor.lastname}
+                <p:dataTable value="#{todaysVisits.rows}" var="row">
+                    <p:column headerText="Godzina">
+                        #{row.time}
+                    </p:column>
+                    <p:column headerText="Pacjent">
+                        
+                        <h:form rendered="#{row.available}">
+                            <p:selectOneMenu value="#{todaysVisits.patientId}" id="patient">
+                                <f:selectItems value="#{newVisitBean.patients}" 
+                                               var="patient"
+                                               itemValue="#{patient.id}" />
+                            </p:selectOneMenu>
+                            
+                            <h:commandButton value="Zapisz" action="#{todaysVisits.addVisit()}" />
+                        </h:form>
+                    </p:column>
+                </p:dataTable>
+
             </ui:define>
 
         </ui:composition>

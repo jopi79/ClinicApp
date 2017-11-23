@@ -73,4 +73,10 @@ public class VisitBean implements Serializable{
     {
         visits = new ArrayList();        
     }
+
+    public List<Visit> getVisits() {
+        return visits;
+    }
+    
+    
 }
