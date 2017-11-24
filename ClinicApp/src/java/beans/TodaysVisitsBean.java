@@ -112,6 +112,8 @@ public class TodaysVisitsBean implements Serializable {
         if (doctor == null) {
             return;
         }
+        
+        //pobierz godziny pracy tego lekarza na dzisiejszy dnia
         LocalDate today = LocalDate.now();
         DayOfWeek dayOfWeek = today.getDayOfWeek();
         List<AdmissionHoursEntry> list = doctor.getAdmissionHours();
@@ -126,6 +128,10 @@ public class TodaysVisitsBean implements Serializable {
         LocalTime fromTime = LocalDateTime.ofInstant(from.toInstant(), ZoneId.systemDefault()).toLocalTime();
         LocalTime toTime = LocalDateTime.ofInstant(to.toInstant(), ZoneId.systemDefault()).toLocalTime();
 
+        //pobierz dzisiejszych pacjentów tego lekarza (już umówione wizyty)
+        List<Visit> myVisits = visitBean.getTodayVisits(doctorId);
+        
+        //wpisz w tabelkę dostępność
         for (Entry entry : rows) {
             LocalTime time = entry.getTime();
             if ((time.isAfter(fromTime) || time.equals(fromTime))
@@ -134,6 +140,9 @@ public class TodaysVisitsBean implements Serializable {
             } else {
                 entry.setAvailable(false);
             }
+            Patient patient = VisitBean.getPatient(myVisits, time);
+//            entry.setPatient(patient);
+            entry.setPatient(new Patient("OOOO","Q "+myVisits.size(),78));
         }
     }
 
@@ -148,9 +157,9 @@ public class TodaysVisitsBean implements Serializable {
 
 
     @Inject
-    PatientBean patientBean;
+    private PatientBean patientBean;
     @Inject
-    VisitBean visitBean;
+    private VisitBean visitBean;
 
     public String addVisit() {
         Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();

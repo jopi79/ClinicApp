@@ -7,6 +7,7 @@ package beans;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.Month;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import javax.enterprise.context.SessionScoped;
 import model.Doctor;
 import model.Patient;
 import model.Visit;
+import util.DateUtil;
 
 /**
  *
@@ -26,57 +28,51 @@ import model.Visit;
  */
 @Named(value = "visitBean")
 @SessionScoped
-public class VisitBean implements Serializable{
+public class VisitBean implements Serializable {
 
     private List<Visit> visits;
-//
-//    private int selectedId;
-//    private Patient selected;
-//
-//    public int getSelectedId() {
-//        return selectedId;
-//    }
-//
-//    public void setSelectedId(int selectedId) {
-//        this.selectedId = selectedId;
-//        this.selected = find(selectedId);
-//    }
-//    
-//    private Patient find(int id)
-//    {
-//        for(Patient d : patients)
-//        {
-//            if(d!=null && d.getId()==id) return d;
-//        }
-//        return new Patient("Brak danych","Brak danych",0);//!!!
-//    }
-//
-//    public Patient getSelected() {
-//        return selected;
-//    }
-//    
-//    public List<Patient> getPatients() {
-//        return patients;
-//    }
-//
-    public void add(Visit v)
-    {
+
+    public void add(Visit v) {
         visits.add(v);
     }
 
     public VisitBean() {
-        
+
     }
-    
+
     @PostConstruct
-    public void init()
-    {
-        visits = new ArrayList();        
+    public void init() {
+        visits = new ArrayList();
     }
 
     public List<Visit> getVisits() {
         return visits;
     }
-    
+
+    public List<Visit> getTodayVisits(int doctorId) {
+        List<Visit> list = new ArrayList();
+        for (Visit visit : visits) {
+            if (doctorId == visit.getDoctor().getId()
+                &&  DateUtil.isToday(visit.getDate()) )
+            {
+                list.add(visit);
+            }
+        }
+        return list;
+    }
+
+    public static Patient getPatient(List<Visit> list, LocalTime time)
+    {
+        for(Visit visit : list)
+        {
+            Date date = visit.getDate();
+            LocalTime time2 = DateUtil.toLocalTime(date);
+            if(time.equals(time2))
+            {
+                return visit.getPatient();
+            }
+        }
+        return null;
+    }
     
 }

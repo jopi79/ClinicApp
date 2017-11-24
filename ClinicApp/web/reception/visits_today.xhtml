@@ -29,28 +29,29 @@
                                            var="doctor"
                                            itemValue="#{doctor.id}" />
                         </p:selectOneMenu>       
-                        <h:commandButton value="OK" />
+                        <p:commandButton value="OK" ajax="false"/>
                     </h:panelGrid>
                 </h:form>
 
 
                 
                 <p:dataTable value="#{todaysVisits.rows}" var="row">
-                    <p:column headerText="Godzina">
+                    <p:column headerText="Godzina" style="width:50px;">
                         #{row.time}
                     </p:column>
                     <p:column headerText="Pacjent">
                         
+                        #{row.patient}
                         <h:form rendered="#{row.available}">
+                            <p:outputLabel  value="#{row.patient}" />
                             <p:selectOneMenu value="#{todaysVisits.patientId}" id="patient">
                                 <f:selectItems value="#{newVisitBean.patients}" 
                                                var="patient"
                                                itemValue="#{patient.id}" />
-                            </p:selectOneMenu>
-                            
-                            <h:commandButton value="Zapisz" action="#{todaysVisits.addVisit()}" >
+                            </p:selectOneMenu>                            
+                            <p:commandButton value="Zapisz" action="#{todaysVisits.addVisit()}" >
                                 <f:param name="time" value="#{row.time}" />
-                            </h:commandButton>
+                            </p:commandButton>
                         </h:form>
                     </p:column>
                 </p:dataTable>
