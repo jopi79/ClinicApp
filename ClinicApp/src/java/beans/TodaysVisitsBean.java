@@ -19,7 +19,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import model.AdmissionHoursEntry;
 import model.Doctor;
@@ -32,13 +34,12 @@ import model.Visit;
  */
 @Named(value = "todaysVisits")
 @SessionScoped
-public class TodaysVisits implements Serializable {
+public class TodaysVisitsBean implements Serializable {
 
     private List<Entry> rows;
     private int doctorId;
     private Doctor doctor;
     private int patientId;
-    private LocalTime time;
 
     @PostConstruct
     public void init() {
@@ -78,8 +79,6 @@ public class TodaysVisits implements Serializable {
             this.available = available;
         }
 
-        
-
         public Patient getPatient() {
             return patient;
         }
@@ -87,8 +86,6 @@ public class TodaysVisits implements Serializable {
         public void setPatient(Patient patient) {
             this.patient = patient;
         }
-
-        
 
     }
 
@@ -148,13 +145,7 @@ public class TodaysVisits implements Serializable {
         this.patientId = patientId;
     }
 
-    public LocalTime getTime() {
-        return time;
-    }
 
-    public void setTime(LocalTime time) {
-        this.time = time;
-    }
 
     @Inject
     PatientBean patientBean;
@@ -162,6 +153,9 @@ public class TodaysVisits implements Serializable {
     VisitBean visitBean;
 
     public String addVisit() {
+        Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        String timeString = params.get("time");
+        LocalTime time = LocalTime.parse(timeString);
         Patient patient = patientBean.find(patientId);
         LocalDate today = LocalDate.now();
         Calendar cal = Calendar.getInstance();
@@ -177,7 +171,7 @@ public class TodaysVisits implements Serializable {
         return "visits";
     }
 
-    public TodaysVisits() {
+    public TodaysVisitsBean() {
     }
 
 }

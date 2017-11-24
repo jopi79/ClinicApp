@@ -79,6 +79,7 @@ public class DoctorBean implements Serializable{
         d = new Doctor("Bazyl","Bieńkowski",2);
         d.setSpecialization(Doctor.Specialization.endocrinologist);
         d.setAdmissionHour(DayOfWeek.TUESDAY, LocalTime.of(10, 0), LocalTime.of(12,0));
+        d.setAdmissionHour(DayOfWeek.FRIDAY, LocalTime.of(8, 0), LocalTime.of(12,0));
         doctors.add(d);
         d = new Doctor("Celestyn","Cierak",3);
         d.setSpecialization(Doctor.Specialization.laryngologist);

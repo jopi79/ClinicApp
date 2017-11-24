@@ -34,7 +34,7 @@
                 </h:form>
 
 
-                #{todaysVisits.doctor.lastname}
+                
                 <p:dataTable value="#{todaysVisits.rows}" var="row">
                     <p:column headerText="Godzina">
                         #{row.time}
@@ -48,7 +48,9 @@
                                                itemValue="#{patient.id}" />
                             </p:selectOneMenu>
                             
-                            <h:commandButton value="Zapisz" action="#{todaysVisits.addVisit()}" />
+                            <h:commandButton value="Zapisz" action="#{todaysVisits.addVisit()}" >
+                                <f:param name="time" value="#{row.time}" />
+                            </h:commandButton>
                         </h:form>
                     </p:column>
                 </p:dataTable>
