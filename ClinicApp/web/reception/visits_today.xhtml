@@ -34,16 +34,14 @@
                 </h:form>
 
 
-                
                 <p:dataTable value="#{todaysVisits.rows}" var="row">
                     <p:column headerText="Godzina" style="width:50px;">
                         #{row.time}
                     </p:column>
                     <p:column headerText="Pacjent">
-                        
-                        #{row.patient}
+
+                        <p:outputLabel  value="#{row.patient}" rendered="#{row.patient!=null}"/>
                         <h:form rendered="#{row.available}">
-                            <p:outputLabel  value="#{row.patient}" />
                             <p:selectOneMenu value="#{todaysVisits.patientId}" id="patient">
                                 <f:selectItems value="#{newVisitBean.patients}" 
                                                var="patient"

@@ -53,26 +53,30 @@ public class VisitBean implements Serializable {
         List<Visit> list = new ArrayList();
         for (Visit visit : visits) {
             if (doctorId == visit.getDoctor().getId()
-                &&  DateUtil.isToday(visit.getDate()) )
-            {
+                    && DateUtil.isToday(visit.getDate())) {
                 list.add(visit);
             }
         }
         return list;
     }
 
-    public static Patient getPatient(List<Visit> list, LocalTime time)
-    {
-        for(Visit visit : list)
-        {
-            Date date = visit.getDate();
-            LocalTime time2 = DateUtil.toLocalTime(date);
-            if(time.equals(time2))
-            {
-                return visit.getPatient();
+    public Patient getPatient(int doctorId, LocalTime time) {
+
+        for (Visit visit : visits) {
+
+            if (doctorId == visit.getDoctor().getId()) {
+                Date date = visit.getDate();
+                if (DateUtil.isToday(visit.getDate())) {
+                    LocalTime time2 = DateUtil.toLocalTime(date);
+                    if (time.getHour()==time2.getHour() && time.getMinute()==time2.getMinute()) {
+                        return visit.getPatient();
+                    }
+                }
             }
         }
         return null;
     }
+
     
+
 }

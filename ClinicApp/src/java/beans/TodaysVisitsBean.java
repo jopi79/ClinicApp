@@ -40,6 +40,11 @@ public class TodaysVisitsBean implements Serializable {
     private int doctorId;
     private Doctor doctor;
     private int patientId;
+    
+    @Inject
+    private PatientBean patientBean;
+    @Inject
+    private VisitBean visitBean;
 
     @PostConstruct
     public void init() {
@@ -128,8 +133,6 @@ public class TodaysVisitsBean implements Serializable {
         LocalTime fromTime = LocalDateTime.ofInstant(from.toInstant(), ZoneId.systemDefault()).toLocalTime();
         LocalTime toTime = LocalDateTime.ofInstant(to.toInstant(), ZoneId.systemDefault()).toLocalTime();
 
-        //pobierz dzisiejszych pacjentów tego lekarza (już umówione wizyty)
-        List<Visit> myVisits = visitBean.getTodayVisits(doctorId);
         
         //wpisz w tabelkę dostępność
         for (Entry entry : rows) {
@@ -140,9 +143,9 @@ public class TodaysVisitsBean implements Serializable {
             } else {
                 entry.setAvailable(false);
             }
-            Patient patient = VisitBean.getPatient(myVisits, time);
-//            entry.setPatient(patient);
-            entry.setPatient(new Patient("OOOO","Q "+myVisits.size(),78));
+            Patient patient = visitBean.getPatient(doctorId, time);
+            entry.setPatient(patient);
+
         }
     }
 
@@ -154,13 +157,6 @@ public class TodaysVisitsBean implements Serializable {
         this.patientId = patientId;
     }
 
-
-
-    @Inject
-    private PatientBean patientBean;
-    @Inject
-    private VisitBean visitBean;
-
     public String addVisit() {
         Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         String timeString = params.get("time");
@@ -171,12 +167,13 @@ public class TodaysVisitsBean implements Serializable {
         cal.set(Calendar.HOUR_OF_DAY, time.getHour());
         cal.set(Calendar.MINUTE, time.getMinute());
         cal.set(Calendar.DAY_OF_MONTH, today.getDayOfMonth());
-        cal.set(Calendar.MONTH, today.getMonthValue());
+        cal.set(Calendar.MONTH, today.getMonthValue()-1);
         cal.set(Calendar.YEAR, today.getYear());
         Date date = cal.getTime();
         Date d = cal.getTime();
         Visit visit = new Visit(doctor, patient, date);
         visitBean.add(visit);
+        updateRows();
         return "visits";
     }
 
