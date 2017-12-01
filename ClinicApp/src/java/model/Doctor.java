@@ -16,12 +16,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import javax.persistence.Entity;
 import util.DateUtil;
 
 /**
  *
  * @author jopi79
  */
+@Entity
 public class Doctor extends Person {
 
     private Specialization specialization;
@@ -67,33 +69,6 @@ public class Doctor extends Person {
         entry.setTo(DateUtil.toDate(to));
     }
 
-    public enum Specialization {
-        pediatrician,
-        laryngologist,
-        endocrinologist,
-        ophthalmologist,
-        dentist;
-        private final static ResourceBundle rb = ResourceBundle.getBundle("messages.specializations");
-
-        @Override
-        public String toString() {
-            switch (this) {
-                case pediatrician:
-                    return rb.getString("pediatrician");
-                case laryngologist:
-                    return rb.getString("laryngologist");
-                case endocrinologist:
-                    return rb.getString("endocrinologist");
-                case ophthalmologist:
-                    return rb.getString("ophthalmologist");
-                case dentist:
-                    return rb.getString("dentist");
-                default:
-                    return "";
-            }
-
-        }
-
-    }
+    
 
 }

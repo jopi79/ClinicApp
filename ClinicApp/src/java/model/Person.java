@@ -5,13 +5,26 @@
  */
 package model;
 
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+
 /**
  *
- * @author Student
+ * @author jopi79
  */
-public class Person {
+@Entity
+@Inheritance(strategy=InheritanceType.JOINED)
+@DiscriminatorColumn(name="PERSON_TYPE",discriminatorType=DiscriminatorType.STRING)
+public abstract class Person {
     private String name, lastname;
     private String login, password;
+    @Id
+    @GeneratedValue(generator="increment")
     private int id;
 
     public Person(String name, String lastname, int id) {

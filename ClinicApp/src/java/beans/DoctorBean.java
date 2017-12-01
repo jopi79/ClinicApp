@@ -15,6 +15,7 @@ import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import model.Doctor;
+import model.Specialization;
 
 /**
  *
@@ -73,22 +74,22 @@ public class DoctorBean implements Serializable{
     {
         doctors = new ArrayList();
         Doctor d = new Doctor("Adam","Adamiak",1);
-        d.setSpecialization(Doctor.Specialization.pediatrician);
+        d.setSpecialization(Specialization.pediatrician);
         d.setAdmissionHour(DayOfWeek.MONDAY, LocalTime.of(8, 0), LocalTime.of(12,0));
         doctors.add(d);
         d = new Doctor("Bazyl","Bieńkowski",2);
-        d.setSpecialization(Doctor.Specialization.endocrinologist);
+        d.setSpecialization(Specialization.endocrinologist);
         d.setAdmissionHour(DayOfWeek.TUESDAY, LocalTime.of(10, 0), LocalTime.of(12,0));
         d.setAdmissionHour(DayOfWeek.FRIDAY, LocalTime.of(8, 0), LocalTime.of(12,0));
         d.setAdmissionHour(DayOfWeek.SATURDAY, LocalTime.of(8, 0), LocalTime.of(12,0));
         d.setAdmissionHour(DayOfWeek.THURSDAY, LocalTime.of(8, 0), LocalTime.of(12,0));
         doctors.add(d);
         d = new Doctor("Celestyn","Cierak",3);
-        d.setSpecialization(Doctor.Specialization.laryngologist);
+        d.setSpecialization(Specialization.laryngologist);
         d.setAdmissionHour(DayOfWeek.WEDNESDAY, LocalTime.of(12, 0), LocalTime.of(15,0));
         doctors.add(d);
         d = new Doctor("Damian","Daniszczuk",4);
-        d.setSpecialization(Doctor.Specialization.ophthalmologist);
+        d.setSpecialization(Specialization.ophthalmologist);
         d.setAdmissionHour(DayOfWeek.THURSDAY, LocalTime.of(14, 0), LocalTime.of(18,0));
         doctors.add(d);
     }

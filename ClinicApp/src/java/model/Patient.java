@@ -9,11 +9,13 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.ResourceBundle;
+import javax.persistence.Entity;
 
 /**
  *
- * @author Student
+ * @author jopi79
  */
+@Entity
 public class Patient extends Person {
 
     private Date birthDate;

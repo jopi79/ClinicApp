@@ -10,6 +10,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.validation.constraints.Size;
 import model.Doctor;
+import model.Specialization;
 
 /**
  *
@@ -22,7 +23,7 @@ public class NewDoctorBean {
     private String name;
     @Size(min=1,message="{lastname_not_empty}")
     private String lastname;
-    private Doctor.Specialization specialization;
+    private Specialization specialization;
     private boolean active;
 
     public String getName() {
@@ -41,11 +42,11 @@ public class NewDoctorBean {
         this.lastname = lastname;
     }
 
-    public Doctor.Specialization getSpecialization() {
+    public Specialization getSpecialization() {
         return specialization;
     }
 
-    public void setSpecialization(Doctor.Specialization specialization) {
+    public void setSpecialization(Specialization specialization) {
         this.specialization = specialization;
     }
 
@@ -69,9 +70,9 @@ public class NewDoctorBean {
         return "doctors";
     }
 
-    public Doctor.Specialization[] getSpecializations()
+    public Specialization[] getSpecializations()
     {
-        return Doctor.Specialization.values();
+        return Specialization.values();
     }
     /**
      * Creates a new instance of NewDoctorBean
