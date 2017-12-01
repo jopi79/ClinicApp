@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import util.DateUtil;
 
 /**
@@ -28,6 +30,7 @@ public class Doctor extends Person {
 
     private Specialization specialization;
     private boolean active;
+    @OneToMany(mappedBy="doctor", fetch=FetchType.LAZY)
     private List<AdmissionHoursEntry> admissionHours;
 
     public Doctor(String name, String lastname, int id) {

@@ -29,7 +29,7 @@ public enum Specialization {
         this.id = id;
     }
 
-
+    //@Transient
     private final static ResourceBundle rb = ResourceBundle.getBundle("messages.specializations");
 
     @Override

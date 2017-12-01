@@ -9,15 +9,19 @@ import java.time.DayOfWeek;
 import java.time.format.TextStyle;
 import java.util.Date;
 import java.util.Locale;
+import javax.persistence.Entity;
 
 /**
  *
  * @author jopi79
  */
+@Entity
 public class AdmissionHoursEntry {
 
     private DayOfWeek dayOfWeek;
     private Date from, to;
+    
+    private Doctor doctor;
 
     public AdmissionHoursEntry(DayOfWeek dayOfWeek, Date from, Date to) {
         this.dayOfWeek = dayOfWeek;
