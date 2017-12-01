@@ -39,18 +39,19 @@
                         #{row.time}
                     </p:column>
                     <p:column headerText="Pacjent">
-
-                        <p:outputLabel  value="#{row.patient}" rendered="#{row.patient!=null}"/>
-                        <h:form rendered="#{row.available}">
-                            <p:selectOneMenu value="#{todaysVisits.patientId}" id="patient">
-                                <f:selectItems value="#{newVisitBean.patients}" 
-                                               var="patient"
-                                               itemValue="#{patient.id}" />
-                            </p:selectOneMenu>                            
-                            <p:commandButton value="Zapisz" action="#{todaysVisits.addVisit()}" >
-                                <f:param name="time" value="#{row.time}" />
-                            </p:commandButton>
-                        </h:form>
+                        <h:panelGrid columns="2" rendered="#{row.available}">
+                            <p:outputLabel  value="#{row.patient}" rendered="#{row.patient!=null}"/>
+                            <h:form rendered="#{row.patient==null}">
+                                <p:selectOneMenu value="#{todaysVisits.patientId}" id="patient">
+                                    <f:selectItems value="#{newVisitBean.patients}" 
+                                                   var="patient"
+                                                   itemValue="#{patient.id}" />
+                                </p:selectOneMenu>                            
+                                <p:commandButton value="Zapisz" action="#{todaysVisits.addVisit()}" >
+                                    <f:param name="time" value="#{row.time}" />
+                                </p:commandButton>
+                            </h:form>
+                        </h:panelGrid>
                     </p:column>
                 </p:dataTable>
 
