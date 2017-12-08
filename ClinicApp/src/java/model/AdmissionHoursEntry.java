@@ -10,17 +10,32 @@ import java.time.format.TextStyle;
 import java.util.Date;
 import java.util.Locale;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 /**
  *
  * @author jopi79
  */
 @Entity
+@Table( name = "AdmissionHours" )
 public class AdmissionHoursEntry {
+
+    @Id
+//    @GeneratedValue(generator = "increment")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "AdmissionHours_SEQ")
+
+@SequenceGenerator(name = "AdmissionHours_SEQ", sequenceName = "AdmissionHours_SEQ")
+    private int id;
 
     private DayOfWeek dayOfWeek;
     private Date from, to;
-    
+
+    @ManyToOne
     private Doctor doctor;
 
     public AdmissionHoursEntry(DayOfWeek dayOfWeek, Date from, Date to) {

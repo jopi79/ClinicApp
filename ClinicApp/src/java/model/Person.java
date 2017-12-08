@@ -9,9 +9,12 @@ import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.SequenceGenerator;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  *
@@ -24,7 +27,12 @@ public abstract class Person {
     private String name, lastname;
     private String login, password;
     @Id
-    @GeneratedValue(generator="increment")
+@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "OSOBA_SEQ")
+@SequenceGenerator(name = "OSOBA_SEQ", sequenceName = "OSOBA_SEQ_W_BAZIE")
+//    @GeneratedValue(generator="increment")
+//    @GenericGenerator(name="increment", strategy = "increment")
+//    @GeneratedValue(generator = "autoincrement")  
+// @GenericGenerator(name = "autoincrement", strategy = "identity")  
     private int id;
 
     public Person(String name, String lastname, int id) {
