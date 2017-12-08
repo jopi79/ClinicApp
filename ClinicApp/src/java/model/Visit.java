@@ -6,15 +6,30 @@
 package model;
 
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 
 /**
  *
- * @author Student
+ * @author jopi79
  */
+@Entity
 public class Visit {
+    @ManyToOne
     private Doctor doctor;
+    @ManyToOne
     private Patient patient;
     private Date date;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Visit_SEQ")
+    @SequenceGenerator(name = "Visit_SEQ", sequenceName = "Visit_SEQ")
+    private int id;
 
     public Visit(Doctor doctor, Patient patient, Date date) {
         this.doctor = doctor;
@@ -44,6 +59,10 @@ public class Visit {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public int getId() {
+        return id;
     }
     
     

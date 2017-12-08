@@ -8,7 +8,7 @@ package model;
 
 /**
  *
- * @author Student
+ * @author jopi79
  */
 public enum UserRole {
     PATIENT,

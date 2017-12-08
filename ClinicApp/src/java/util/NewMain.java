@@ -14,6 +14,8 @@ import model.AdmissionHoursEntry;
 import model.Doctor;
 import model.Patient;
 import model.Person;
+import model.Specialization;
+import model.Visit;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 
@@ -29,6 +31,8 @@ public class NewMain {
         config.addAnnotatedClass(Doctor.class);
         config.addAnnotatedClass(Patient.class);
         config.addAnnotatedClass(AdmissionHoursEntry.class);
+//        config.addAnnotatedClass(Specialization.class);
+        config.addAnnotatedClass(Visit.class);
         config.configure("hibernate.cfg.xml");
         new SchemaExport(config).create(true, true);
     }

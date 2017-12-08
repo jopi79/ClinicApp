@@ -17,7 +17,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import util.DateUtil;
 
@@ -28,6 +31,7 @@ import util.DateUtil;
 @Entity
 public class Doctor extends Person {
 
+    @Enumerated(EnumType.STRING)
     private Specialization specialization;
     private boolean active;
     @OneToMany(mappedBy="doctor", fetch=FetchType.LAZY)

@@ -9,6 +9,7 @@ import java.time.DayOfWeek;
 import java.time.format.TextStyle;
 import java.util.Date;
 import java.util.Locale;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,18 +23,20 @@ import javax.persistence.Table;
  * @author jopi79
  */
 @Entity
-@Table( name = "AdmissionHours" )
+@Table(name = "AdmissionHours")
 public class AdmissionHoursEntry {
 
     @Id
 //    @GeneratedValue(generator = "increment")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "AdmissionHours_SEQ")
-
-@SequenceGenerator(name = "AdmissionHours_SEQ", sequenceName = "AdmissionHours_SEQ")
+    @SequenceGenerator(name = "AdmissionHours_SEQ", sequenceName = "AdmissionHours_SEQ")
     private int id;
 
     private DayOfWeek dayOfWeek;
-    private Date from, to;
+    @Column(name = "adm_from")
+    private Date from;
+    @Column(name = "adm_to")
+    private Date to;
 
     @ManyToOne
     private Doctor doctor;
