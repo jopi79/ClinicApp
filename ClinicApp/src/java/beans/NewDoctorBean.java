@@ -66,7 +66,7 @@ public class NewDoctorBean {
         Doctor d = new Doctor(name, lastname,5);
         d.setActive(active);
         d.setSpecialization(specialization);
-        doctorsBean.add(d);
+        doctorsBean.save(d);
         return "doctors";
     }
 
