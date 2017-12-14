@@ -5,6 +5,7 @@
  */
 package beans;
 
+import dao.DoctorDAO;
 import java.io.Serializable;
 import java.time.DayOfWeek;
 import java.time.Instant;
@@ -14,6 +15,7 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -25,6 +27,7 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import model.AdmissionHoursEntry;
 import model.Doctor;
+import util.DateUtil;
 
 /**
  *
@@ -63,4 +66,13 @@ public class AdmissionHoursBean implements Serializable {
     public AdmissionHoursBean() {
     }
 
+    public String save() {
+        for (AdmissionHoursEntry e : admissionHours) {
+            if (!DateUtil.isZeroTime(e.getFrom())) {
+                
+                DoctorDAO.update(e);
+            }
+        }
+        return "doctors";
+    }
 }

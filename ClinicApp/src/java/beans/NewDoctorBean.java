@@ -63,7 +63,7 @@ public class NewDoctorBean {
     
     public String save()
     {
-        Doctor d = new Doctor(name, lastname,5);
+        Doctor d = new Doctor(name, lastname);
         d.setActive(active);
         d.setSpecialization(specialization);
         doctorsBean.save(d);

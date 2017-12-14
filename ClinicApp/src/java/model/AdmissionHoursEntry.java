@@ -75,4 +75,23 @@ public class AdmissionHoursEntry {
         this.to = to;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public AdmissionHoursEntry() {
+    }
+
 }

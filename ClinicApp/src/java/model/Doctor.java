@@ -34,16 +34,13 @@ public class Doctor extends Person {
     @Enumerated(EnumType.STRING)
     private Specialization specialization;
     private boolean active;
-    @OneToMany(mappedBy="doctor", fetch=FetchType.LAZY)
+    @OneToMany(mappedBy="doctor", fetch=FetchType.EAGER)
     private List<AdmissionHoursEntry> admissionHours;
 
-    public Doctor(String name, String lastname, int id) {
-        super(name, lastname, id);
+    public Doctor(String name, String lastname) {
+        super(name, lastname);
         admissionHours = new ArrayList();
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        Date date =  calendar.getTime();
+        Date date =  DateUtil.getZeroZeroTime();
         for (DayOfWeek day : DayOfWeek.values()) {
             admissionHours.add(new AdmissionHoursEntry(day, date, date));
         }
@@ -74,6 +71,9 @@ public class Doctor extends Person {
         AdmissionHoursEntry entry = admissionHours.get(day.ordinal());
         entry.setFrom(DateUtil.toDate(from));
         entry.setTo(DateUtil.toDate(to));
+    }
+
+    public Doctor() {
     }
 
     

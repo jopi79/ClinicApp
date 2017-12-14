@@ -47,7 +47,7 @@ public class PatientBean implements Serializable{
         {
             if(d!=null && d.getId()==id) return d;
         }
-        return new Patient("Brak danych","Brak danych",0);//!!!
+        return new Patient("Brak danych","Brak danych");//!!!
     }
 
     public Patient getSelected() {

@@ -12,12 +12,33 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  *
  * @author jopi79
  */
 public class DateUtil {
+
+    public static Date getZeroZeroTime() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        Date date = calendar.getTime();
+        return date;
+    }
+
+    public static boolean isZeroZeroTime(Date date) {
+        Calendar calendar = GregorianCalendar.getInstance();
+        calendar.setTime(date);
+        return calendar.get(Calendar.HOUR) == 0 && calendar.get(Calendar.MINUTE) == 0;
+    }
+
+    public static boolean isZeroTime(Date date) {
+        Calendar calendar = GregorianCalendar.getInstance();
+        calendar.setTime(date);
+        return calendar.get(Calendar.HOUR) == 0;
+    }
 
     public static Date toDate(LocalTime lt) {
         Instant instant = lt.atDate(LocalDate.of(2000, 1, 1)).

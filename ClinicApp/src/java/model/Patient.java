@@ -21,7 +21,11 @@ public class Patient extends Person {
     private Date birthDate;
 
     public Patient(String name, String lastname, int id) {
-        super(name, lastname, id);
+        super(name, lastname,id);
+    }
+
+    public Patient(String name, String lastname) {
+        super(name, lastname);
     }
 
     public Date getBirthDate() {
@@ -36,6 +40,9 @@ public class Patient extends Person {
     {
         LocalDate date = birthDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         return date;
+    }
+
+    public Patient() {
     }
 
 }

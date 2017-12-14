@@ -46,7 +46,7 @@ public class DoctorBean implements Serializable{
         {
             if(d!=null && d.getId()==id) return d;
         }
-        return new Doctor("Brak danych","Brak danych",0);//!!!
+        return new Doctor("Brak danych","Brak danych");//!!!
     }
 
     public Doctor getSelected() {

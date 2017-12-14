@@ -41,12 +41,20 @@ public abstract class Person {
         this.id = id;
     }
 
+    public Person(String name, String lastname) {
+        this.name = name;
+        this.lastname = lastname;
+    }
+
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Person() {
     }
 
 
