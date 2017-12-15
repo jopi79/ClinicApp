@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -34,7 +35,7 @@ public class Doctor extends Person {
     @Enumerated(EnumType.STRING)
     private Specialization specialization;
     private boolean active;
-    @OneToMany(mappedBy="doctor", fetch=FetchType.EAGER)
+    @OneToMany(mappedBy="doctor", fetch=FetchType.EAGER,cascade = {CascadeType.ALL})
     private List<AdmissionHoursEntry> admissionHours;
 
     public Doctor(String name, String lastname) {

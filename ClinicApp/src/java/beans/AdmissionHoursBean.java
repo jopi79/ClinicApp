@@ -68,10 +68,7 @@ public class AdmissionHoursBean implements Serializable {
 
     public String save() {
         for (AdmissionHoursEntry e : admissionHours) {
-            if (!DateUtil.isZeroTime(e.getFrom())) {
-                
-                DoctorDAO.update(e);
-            }
+            DoctorDAO.update(e);
         }
         return "doctors";
     }

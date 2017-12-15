@@ -31,7 +31,7 @@ public class DoctorDAO extends DAO {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.openSession();
         try {
-            Criteria criteria = session.createCriteria(Doctor.class);
+            Criteria criteria = session.createCriteria(Doctor.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
             List<Doctor> list = criteria.list();
             return list;
         } finally {
@@ -45,15 +45,15 @@ public class DoctorDAO extends DAO {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
+            Integer id = (Integer) session.save(d);
+            d.setId(id);
             List<AdmissionHoursEntry> admissionHours = d.getAdmissionHours();
             for(AdmissionHoursEntry entry : admissionHours)
             {
                 entry.setDoctor(d);
-                Integer id = (Integer) session.save(entry);
+                id = (Integer) session.save(entry);
                 entry.setId(id);
             }
-            Integer id = (Integer) session.save(d);
-            d.setId(id);
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
