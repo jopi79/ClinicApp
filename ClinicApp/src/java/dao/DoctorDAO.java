@@ -45,15 +45,15 @@ public class DoctorDAO extends DAO {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            Integer id = (Integer) session.save(d);
-            d.setId(id);
             List<AdmissionHoursEntry> admissionHours = d.getAdmissionHours();
             for(AdmissionHoursEntry entry : admissionHours)
             {
                 entry.setDoctor(d);
-                id = (Integer) session.save(entry);
+                Integer id = (Integer) session.save(entry);
                 entry.setId(id);
             }
+            Integer id = (Integer) session.save(d);
+            d.setId(id);
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
