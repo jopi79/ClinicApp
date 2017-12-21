@@ -13,12 +13,26 @@ import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import model.Patient;
 
 /**
  *
  * @author jopi79
  */
 public class DateUtil {
+
+    public static Date getTodayDayWithGivenHour(String timeString) {
+        LocalTime time = LocalTime.parse(timeString);
+        LocalDate today = LocalDate.now();
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY, time.getHour());
+        cal.set(Calendar.MINUTE, time.getMinute());
+        cal.set(Calendar.DAY_OF_MONTH, today.getDayOfMonth());
+        cal.set(Calendar.MONTH, today.getMonthValue()-1);
+        cal.set(Calendar.YEAR, today.getYear());
+        Date date = cal.getTime();
+        return date;
+    }
 
     public static Date getZeroZeroTime() {
         Calendar calendar = Calendar.getInstance();

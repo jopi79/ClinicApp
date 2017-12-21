@@ -27,6 +27,7 @@ import model.AdmissionHoursEntry;
 import model.Doctor;
 import model.Patient;
 import model.Visit;
+import util.DateUtil;
 
 /**
  *
@@ -40,6 +41,8 @@ public class TodaysVisitsBean implements Serializable {
     private int doctorId;
     private Doctor doctor;
     private int patientId;
+    private Entry entry;
+    
     
     @Inject
     private PatientBean patientBean;
@@ -158,25 +161,27 @@ public class TodaysVisitsBean implements Serializable {
     }
 
     public String addVisit() {
-        Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        String timeString = params.get("time");
-        LocalTime time = LocalTime.parse(timeString);
-        Patient patient = patientBean.find(patientId);
-        LocalDate today = LocalDate.now();
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.HOUR_OF_DAY, time.getHour());
-        cal.set(Calendar.MINUTE, time.getMinute());
-        cal.set(Calendar.DAY_OF_MONTH, today.getDayOfMonth());
-        cal.set(Calendar.MONTH, today.getMonthValue()-1);
-        cal.set(Calendar.YEAR, today.getYear());
-        Date date = cal.getTime();
-        Date d = cal.getTime();
+        
+        Date date = DateUtil.getTodayDayWithGivenHour(entry.getTime().toString());
+        
+        Patient patient = patientBean.find(patientId);        
+        
         Visit visit = new Visit(doctor, patient, date);
         visitBean.add(visit);
         updateRows();
         return "visits";
     }
 
+    public Entry getEntry() {
+        return entry;
+    }
+
+    public void setEntry(Entry entry) {
+        this.entry = entry;
+    }
+
+    
+    
     public TodaysVisitsBean() {
     }
 

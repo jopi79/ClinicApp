@@ -38,26 +38,16 @@ public class NewMain {
     }
 
     private static void dateTest() {
-        LocalDate today = LocalDate.now();
-        System.out.println(today);
-        System.out.println(today.getMonthValue());
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.HOUR_OF_DAY, 8);
-        cal.set(Calendar.MINUTE, 0);
-        cal.set(Calendar.DAY_OF_MONTH, today.getDayOfMonth());
-        cal.set(Calendar.MONTH, today.getMonthValue() - 1);
-        cal.set(Calendar.YEAR, today.getYear());
-        Date date = cal.getTime();
-        System.out.println(date);
         LocalTime time = LocalTime.of(8, 0);
-        LocalTime time2 = DateUtil.toLocalTime(date);
-        System.out.println(time2);
-        System.out.println(time.equals(time2));
-        System.out.println(time.getHour() == time2.getHour() && time.getMinute() == time2.getMinute());
+        System.out.println(time);
+        Date date = DateUtil.getTodayDayWithGivenHour("18:15");
+        System.out.println(date);
+        
     }
     
     public static void main(String[] args) {
-        createDB();
+        //createDB();
+        dateTest();
     }
 
 }

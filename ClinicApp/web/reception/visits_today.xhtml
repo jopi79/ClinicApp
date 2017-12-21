@@ -43,9 +43,13 @@
                             <p:outputLabel  value="#{row.patient}" rendered="#{row.patient!=null}"/>
 
                             <p:commandButton rendered="#{row.patient==null}"
-                                value="Zapisz pacjenta na wizytę" type="button" onclick="PF('dlg1').show();" />
+                                             action="#{todaysVisits.setEntry(row)}"
+                                value="Zapisz pacjenta na wizytę" type="button" 
+                                update=":dlg1"
+                                onclick="PF('dlg1').show();" />
 
-                            <p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="40">
+                            <p:dialog 
+                                header="Basic Dialog" widgetVar="dlg1" minHeight="40">
 
                                 <h:form >
 
@@ -58,9 +62,12 @@
                                                        var="patient"
                                                        itemValue="#{patient.id}" />
                                     </p:selectOneMenu>                          <br/>
-                                    <p:commandButton value="Zapisz" action="#{todaysVisits.addVisit()}" >
-                                        <f:param name="time" value="#{row.time}" />
-                                    </p:commandButton>
+                                    
+                                    <h:outputText value="Godzina:" />
+                                    <h:outputText value="#{todaysVisits.entry.time}" /><br/>
+                                    
+                                    <p:commandButton value="Zapisz" action="#{todaysVisits.addVisit()}" />
+                                    <p:button value="Close" onclick="PF('dlg1').hide(); return false" />
 
 
                                 </h:form>
