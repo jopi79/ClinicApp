@@ -39,21 +39,39 @@
                         #{row.time}
                     </p:column>
                     <p:column headerText="Pacjent">
-                        <h:panelGrid columns="2" rendered="#{row.available}">
+                        <p:panel  rendered="#{row.available}">
                             <p:outputLabel  value="#{row.patient}" rendered="#{row.patient!=null}"/>
-                            <h:form rendered="#{row.patient==null}">
-                                <p:selectOneMenu value="#{todaysVisits.patientId}" id="patient">
-                                    <f:selectItems value="#{newVisitBean.patients}" 
-                                                   var="patient"
-                                                   itemValue="#{patient.id}" />
-                                </p:selectOneMenu>                            
-                                <p:commandButton value="Zapisz" action="#{todaysVisits.addVisit()}" >
-                                    <f:param name="time" value="#{row.time}" />
-                                </p:commandButton>
-                            </h:form>
-                        </h:panelGrid>
+
+                            <p:commandButton rendered="#{row.patient==null}"
+                                value="Zapisz pacjenta na wizytę" type="button" onclick="PF('dlg1').show();" />
+
+                            <p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="40">
+
+                                <h:form >
+
+                                    <h:outputText value="Lekarz: " />
+                                    <h:outputText value="#{todaysVisits.doctor.toString()}" /><br/>
+
+                                    <h:outputText value="Pacjent: " />
+                                    <p:selectOneMenu value="#{todaysVisits.patientId}" id="patient">
+                                        <f:selectItems value="#{newVisitBean.patients}" 
+                                                       var="patient"
+                                                       itemValue="#{patient.id}" />
+                                    </p:selectOneMenu>                          <br/>
+                                    <p:commandButton value="Zapisz" action="#{todaysVisits.addVisit()}" >
+                                        <f:param name="time" value="#{row.time}" />
+                                    </p:commandButton>
+
+
+                                </h:form>
+                            </p:dialog>
+
+
+
+                        </p:panel>
                     </p:column>
                 </p:dataTable>
+
 
             </ui:define>
 
