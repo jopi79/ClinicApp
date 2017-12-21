@@ -5,6 +5,7 @@
  */
 package beans;
 
+import dao.PatientDAO;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
@@ -61,6 +62,7 @@ public class PatientBean implements Serializable{
     public void add(Patient d)
     {
         patients.add(d);
+        PatientDAO.save(d);
     }
     
     
@@ -74,6 +76,8 @@ public class PatientBean implements Serializable{
     @PostConstruct
     public void init()
     {
+        patients = PatientDAO.getPatients();
+        /*
         patients = new ArrayList();
         Patient d = new Patient("Ewa","Ezmont",1);
         LocalDate localDate = LocalDate.of(1956, Month.DECEMBER, 12);
@@ -90,6 +94,6 @@ public class PatientBean implements Serializable{
         d = new Patient("Halina","Hańska",4);
         localDate = LocalDate.of(2012, Month.SEPTEMBER, 12);
         d.setBirthDate(Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
-        patients.add(d);
+        patients.add(d);*/
     }
 }

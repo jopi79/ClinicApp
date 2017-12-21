@@ -21,25 +21,17 @@ import org.hibernate.annotations.GenericGenerator;
  * @author jopi79
  */
 @Entity
-@Inheritance(strategy=InheritanceType.JOINED)
-@DiscriminatorColumn(name="PERSON_TYPE",discriminatorType=DiscriminatorType.STRING)
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "PERSON_TYPE", discriminatorType = DiscriminatorType.STRING)
 public abstract class Person {
+
     private String name, lastname;
     private String login, password;
+    
     @Id
-@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "OSOBA_SEQ")
-@SequenceGenerator(name = "OSOBA_SEQ", sequenceName = "OSOBA_SEQ_W_BAZIE")
-//    @GeneratedValue(generator="increment")
-//    @GenericGenerator(name="increment", strategy = "increment")
-//    @GeneratedValue(generator = "autoincrement")  
-// @GenericGenerator(name = "autoincrement", strategy = "identity")  
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "OSOBA_SEQ")
+    @SequenceGenerator(name = "OSOBA_SEQ", sequenceName = "OSOBA_SEQ_W_BAZIE")
     private int id;
-
-    public Person(String name, String lastname, int id) {
-        this.name = name;
-        this.lastname = lastname;
-        this.id = id;
-    }
 
     public Person(String name, String lastname) {
         this.name = name;
@@ -57,9 +49,6 @@ public abstract class Person {
     public Person() {
     }
 
-
-    
-    
     public String getName() {
         return name;
     }
@@ -91,9 +80,8 @@ public abstract class Person {
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    public String toString()
-    {
-        return lastname+" "+name;
+
+    public String toString() {
+        return lastname + " " + name;
     }
 }

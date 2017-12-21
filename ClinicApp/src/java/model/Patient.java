@@ -20,10 +20,6 @@ public class Patient extends Person {
 
     private Date birthDate;
 
-    public Patient(String name, String lastname, int id) {
-        super(name, lastname,id);
-    }
-
     public Patient(String name, String lastname) {
         super(name, lastname);
     }

@@ -22,7 +22,8 @@
                         <p:inputText value="#{newPatientBean.lastname}" id="lastname" />
                         <p:message for="lastname" />
                         <h:outputText value="Data urodzenia: " />
-                        <p:calendar id="birthDate" value="#{newPatientBean.birthDate}" />
+                        <p:calendar id="birthDate" value="#{newPatientBean.birthDate}"
+                                    yearRange="c-100:c" navigator="true"  />
                         <p:message for="birthDate" />
                     </h:panelGrid>
                     <p:commandButton ajax="false" value="Zapisz" action="#{newPatientBean.save}" />

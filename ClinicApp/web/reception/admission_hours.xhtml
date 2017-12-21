@@ -23,11 +23,13 @@
                         </p:column>
 
                         <p:column headerText="Od">
-                            <p:calendar  value="#{entry.from}" pattern="HH:mm" timeOnly="true"  />
+                            <p:calendar   value="#{entry.from}" pattern="HH:mm" timeOnly="true"
+                                          minHour="7" maxHour="20"  stepMinute="15" />
                         </p:column>
 
                         <p:column headerText="Do">
-                            <p:calendar  value="#{entry.to}" pattern="HH:mm" timeOnly="true"  />
+                            <p:calendar  value="#{entry.to}" pattern="HH:mm" timeOnly="true"
+                                        minHour="7" maxHour="20"  stepMinute="15" />
                         </p:column>
 
                     </p:dataTable>

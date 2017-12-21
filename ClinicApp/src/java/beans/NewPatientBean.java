@@ -58,7 +58,7 @@ public class NewPatientBean {
     
     public String save()
     {
-        Patient d = new Patient(name, lastname,5);
+        Patient d = new Patient(name, lastname);
         d.setBirthDate(birthDate);
         patientBean.add(d);
         

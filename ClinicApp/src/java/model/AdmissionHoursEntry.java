@@ -9,6 +9,7 @@ import java.time.DayOfWeek;
 import java.time.format.TextStyle;
 import java.util.Date;
 import java.util.Locale;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,7 +39,7 @@ public class AdmissionHoursEntry {
     @Column(name = "adm_to")
     private Date to;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Doctor doctor;
 
     public AdmissionHoursEntry(DayOfWeek dayOfWeek, Date from, Date to) {
