@@ -5,6 +5,7 @@
  */
 package beans;
 
+import dao.VisitDAO;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -34,6 +35,7 @@ public class VisitBean implements Serializable {
 
     public void add(Visit v) {
         visits.add(v);
+        VisitDAO.save(v);
     }
 
     public VisitBean() {
@@ -42,7 +44,7 @@ public class VisitBean implements Serializable {
 
     @PostConstruct
     public void init() {
-        visits = new ArrayList();
+        visits = VisitDAO.getVisits();
     }
 
     public List<Visit> getVisits() {
