@@ -41,7 +41,7 @@ public class TodaysVisitsBean implements Serializable {
     private int doctorId;
     private Doctor doctor;
     private int patientId;
-    private Entry entry;
+    private String selectedTime = "jadłodajnia";
     
     
     @Inject
@@ -162,24 +162,23 @@ public class TodaysVisitsBean implements Serializable {
 
     public String addVisit() {
         
-        Date date = DateUtil.getTodayDayWithGivenHour(entry.getTime().toString());
-        
-        Patient patient = patientBean.find(patientId);        
-        
+        Date date = DateUtil.getTodayDayWithGivenHour(selectedTime);        
+        Patient patient = patientBean.find(patientId);                
         Visit visit = new Visit(doctor, patient, date);
         visitBean.add(visit);
         updateRows();
-        return "visits";
+        return null;
     }
 
-    public Entry getEntry() {
-        return entry;
+    public String getSelectedTime() {
+        return selectedTime;
     }
 
-    public void setEntry(Entry entry) {
-        this.entry = entry;
+    public void setSelectedTime(String selectedTime) {
+        this.selectedTime = selectedTime;
     }
 
+    
     
     
     public TodaysVisitsBean() {

@@ -18,6 +18,8 @@
 
             <ui:define name="content">
                 <h3>Dzisiejsze wizyty</h3>
+                <h:outputText id="kkk" value="#{todaysVisits.selectedTime}" />
+                
                 <h:form>
                     <h:panelGrid columns="3">
 
@@ -39,45 +41,43 @@
                         #{row.time}
                     </p:column>
                     <p:column headerText="Pacjent">
-                        <p:panel  rendered="#{row.available}">
+                        <h:form   rendered="#{row.available}">
                             <p:outputLabel  value="#{row.patient}" rendered="#{row.patient!=null}"/>
 
                             <p:commandButton rendered="#{row.patient==null}"
-                                             action="#{todaysVisits.setEntry(row)}"
-                                value="Zapisz pacjenta na wizytę" type="button" 
-                                update=":dlg1"
-                                onclick="PF('dlg1').show();" />
-
-                            <p:dialog 
-                                header="Basic Dialog" widgetVar="dlg1" minHeight="40">
-
-                                <h:form >
-
-                                    <h:outputText value="Lekarz: " />
-                                    <h:outputText value="#{todaysVisits.doctor.toString()}" /><br/>
-
-                                    <h:outputText value="Pacjent: " />
-                                    <p:selectOneMenu value="#{todaysVisits.patientId}" id="patient">
-                                        <f:selectItems value="#{newVisitBean.patients}" 
-                                                       var="patient"
-                                                       itemValue="#{patient.id}" />
-                                    </p:selectOneMenu>                          <br/>
-                                    
-                                    <h:outputText value="Godzina:" />
-                                    <h:outputText value="#{todaysVisits.entry.time}" /><br/>
-                                    
-                                    <p:commandButton value="Zapisz" action="#{todaysVisits.addVisit()}" />
-                                    <p:button value="Close" onclick="PF('dlg1').hide(); return false" />
-
-
-                                </h:form>
-                            </p:dialog>
-
-
-
-                        </p:panel>
+                                             action="#{todaysVisits.setSelectedTime(row.time)}"
+                                             value="Zapisz pacjenta na wizytę"
+                                             update=":kkk,:dlg1"
+                                             oncomplete="PF('dlg1').show();"
+                                             />
+                        </h:form>
                     </p:column>
                 </p:dataTable>
+                <p:dialog id="dlg1"
+                    header="Nowa wizyta" widgetVar="dlg1" minHeight="40">
+
+                    <h:form >
+
+                        <h:outputText value="Lekarz: " />
+                        <h:outputText value="#{todaysVisits.doctor.toString()}" /><br/>
+
+                        <h:outputText value="Pacjent: " />
+                        <p:selectOneMenu value="#{todaysVisits.patientId}" id="patient">
+                            <f:selectItems value="#{newVisitBean.patients}" 
+                                           var="patient"
+                                           itemValue="#{patient.id}" />
+                        </p:selectOneMenu>                          <br/>
+
+                        <h:outputText value="Godzina:" />
+                        <h:outputText value="#{todaysVisits.selectedTime}" /><br/>
+
+                        <p:commandButton ajax="false" value="Zapisz" action="#{todaysVisits.addVisit()}" />
+                        <p:button value="Close" onclick="PF('dlg1').hide(); return false" />
+
+
+                    </h:form>
+                </p:dialog>
+
 
 
             </ui:define>
