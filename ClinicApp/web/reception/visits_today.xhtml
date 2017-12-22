@@ -18,8 +18,7 @@
 
             <ui:define name="content">
                 <h3>Dzisiejsze wizyty</h3>
-                <h:outputText id="kkk" value="#{todaysVisits.selectedTime}" />
-                
+
                 <h:form>
                     <h:panelGrid columns="3">
 
@@ -47,7 +46,7 @@
                             <p:commandButton rendered="#{row.patient==null}"
                                              action="#{todaysVisits.setSelectedTime(row.time)}"
                                              value="Zapisz pacjenta na wizytę"
-                                             update=":kkk,:dlg1"
+                                             update=":dlg1"
                                              oncomplete="PF('dlg1').show();"
                                              />
                         </h:form>
