@@ -41,7 +41,7 @@ public class TodaysVisitsBean implements Serializable {
     private int doctorId;
     private Doctor doctor;
     private int patientId;
-    private String selectedTime = "jadłodajnia";
+    private String selectedTime;
     
     
     @Inject
