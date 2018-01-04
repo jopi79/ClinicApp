@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.util.Locale;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
@@ -15,6 +16,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.SequenceGenerator;
 import org.hibernate.annotations.GenericGenerator;
+import util.PasswordUtil;
 
 /**
  *
@@ -36,6 +38,8 @@ public abstract class Person {
     public Person(String name, String lastname) {
         this.name = name;
         this.lastname = lastname;
+        login = (name+lastname).toLowerCase(new Locale("pl"));
+        password = PasswordUtil.hashPassword(login);
     }
 
     public int getId() {

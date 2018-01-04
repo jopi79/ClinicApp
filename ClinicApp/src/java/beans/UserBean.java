@@ -5,11 +5,14 @@ package beans;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import dao.UserDAO;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import model.Doctor;
+import model.Person;
 import model.UserRole;
 
 /**
@@ -55,6 +58,16 @@ public class UserBean implements Serializable {
             userRole = UserRole.RECEPTION;
             logged = true;
             return "/reception/index.xhtml";
+        }
+        Person person = UserDAO.getUser(login, password);
+        if (person != null) {
+            logged = true;
+            if (person instanceof Doctor) {
+                userRole = UserRole.DOCTOR;
+                return "/doctor/index.xhtml";
+            } else {
+                return "/patient/patientIndex.xhtml";
+            }
         }
         logged = false;
         FacesContext context = FacesContext.getCurrentInstance();

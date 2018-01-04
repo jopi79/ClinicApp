@@ -45,9 +45,22 @@ public class NewMain {
         
     }
     
+    private static void string()
+    {
+        
+        System.out.println(StringUtil.stripDiacritics("julianbąk"));
+        System.out.println(StringUtil.stripDiacritics("czesławceliński"));
+        System.out.println(StringUtil.stripDiacritics("wieńczysławwańkowszczak"));
+        
+        System.out.println(StringUtil.removePolishChars("julianbąk"));
+        System.out.println(StringUtil.removePolishChars("czesławceliński"));
+        System.out.println(StringUtil.removePolishChars("wieńczysławwańkowszczak"));
+    }
+    
     public static void main(String[] args) {
         //createDB();
-        dateTest();
+        //dateTest();
+        string();
     }
 
 }
