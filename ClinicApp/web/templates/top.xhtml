@@ -13,7 +13,7 @@
                 <h:panelGrid columns="2">
                     <h3>Clinic App</h3>
                     <h:form rendered="#{userBean.logged}">
-                        Witaj #{userBean.login}. Jesteś zalogowany jako #{userBean.userRole}.
+                        Witaj #{userBean.name} #{userBean.lastname}. Jesteś zalogowany jako #{userBean.userRole}.
                         <p:commandLink ajax="false" value="Wyloguj" action="#{userBean.logout()}" />
                     </h:form> 
                     <h:form rendered="#{not userBean.logged}">

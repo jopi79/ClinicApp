@@ -12,6 +12,7 @@ import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import model.Doctor;
+import model.Patient;
 import model.Person;
 import model.UserRole;
 
@@ -26,6 +27,7 @@ public class UserBean implements Serializable {
     private String login, password;
     private UserRole userRole;
     private boolean logged = false;
+    private Person person;
 
     public String getLogin() {
         return login;
@@ -44,29 +46,27 @@ public class UserBean implements Serializable {
     }
 
     public String logIn() {
-        if ("jan".equals(login)) {
-            userRole = UserRole.PATIENT;
-            logged = true;
-            return "/index";
-        }
-        if ("adam".equals(login)) {
-            userRole = UserRole.DOCTOR;
-            logged = true;
-            return "/index";
-        }
+        
         if ("ala".equals(login)) {
             userRole = UserRole.RECEPTION;
             logged = true;
             return "/reception/index.xhtml";
         }
-        Person person = UserDAO.getUser(login, password);
+        person = UserDAO.getUser(login, password);
         if (person != null) {
             logged = true;
             if (person instanceof Doctor) {
                 userRole = UserRole.DOCTOR;
                 return "/doctor/index.xhtml";
-            } else {
-                return "/patient/patientIndex.xhtml";
+            } 
+            else if(person instanceof Patient){
+                userRole = UserRole.PATIENT;
+                return "/patient/index.xhtml";
+            }
+            else
+            {
+                userRole = UserRole.RECEPTION;
+                return "/reception/index.xhtml";
             }
         }
         logged = false;
@@ -104,6 +104,17 @@ public class UserBean implements Serializable {
         return userRole != null && userRole == UserRole.RECEPTION;
     }
 
+    public String getName()
+    {
+        if(person!=null) return person.getName();
+        return login;
+    }
+    
+    public String getLastname()
+    {
+        if(person!=null) return person.getLastname();
+        return "";
+    }
     /**
      * Creates a new instance of UserBean
      */
