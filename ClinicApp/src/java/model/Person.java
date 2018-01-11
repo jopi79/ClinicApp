@@ -17,6 +17,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.SequenceGenerator;
 import org.hibernate.annotations.GenericGenerator;
 import util.PasswordUtil;
+import util.StringUtil;
 
 /**
  *
@@ -38,7 +39,7 @@ public abstract class Person {
     public Person(String name, String lastname) {
         this.name = name;
         this.lastname = lastname;
-        login = (name+lastname).toLowerCase(new Locale("pl"));
+        login = StringUtil.removePolishChars((name+lastname).toLowerCase(new Locale("pl")));
         password = PasswordUtil.hashPassword(login);
     }
 
